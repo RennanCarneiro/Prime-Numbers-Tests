@@ -1,9 +1,7 @@
+package algorithms;
 
 public class PollardRho {
-    /**
-     * Simple implementation of Pollard's Rho algorithm
-     * This version is easier to understand and explain
-     */
+    
     public static long findFactor(long n) {
         // If n is even, 2 is a factor
         if (n % 2 == 0) return 2;

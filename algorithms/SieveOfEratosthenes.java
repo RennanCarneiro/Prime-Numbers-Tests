@@ -1,3 +1,4 @@
+package algorithms;
 public class SieveOfEratosthenes {
     /**
      * Implements the Sieve of Eratosthenes algorithm to find all prime numbers up to n
