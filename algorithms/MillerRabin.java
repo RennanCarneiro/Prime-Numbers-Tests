@@ -1,4 +1,5 @@
 package algorithms;
+
 public class MillerRabin {
     /**
      * Performs the Miller-Rabin primality test
