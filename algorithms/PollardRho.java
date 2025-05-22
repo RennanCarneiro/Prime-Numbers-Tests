@@ -1,5 +1,11 @@
 package algorithms;
-
+/*
+ * utilizes a polynomial function f(x) = x^2 + 1
+ * the idea is if apllied the function many times, two values will be the same, and the difference between them will be a factor of n.
+ * this is based on the birthday paradox, that says that in a group of 23 people, there is a 50% chance that two people have the same birthday.
+ * in this case, we are looking for two values that are the same when applied the function many times.
+ * does not work for numbes with big prime factors.
+ */
 public class PollardRho {
     
     public static long findFactor(long n) {
@@ -9,34 +15,37 @@ public class PollardRho {
         // If n is 1, return 1
         if (n == 1) return 1;
         
-        // Start with x = 2
+        // Start with x = 2 and y = 2. It will 'walk' like the tortoise and the hare.
         long x = 2;
         long y = 2;
-        long d = 1;
+        long d = 1; //this will be the MDC between x-y and n.
         
         // Keep trying until we find a factor
         while (d == 1) {
-            // Move x one step
+            // Move x one step like the tortoise
             x = (x * x + 1) % n;
-            
-            // Move y two steps
+    
+            // Move y two steps like the hare
             y = (y * y + 1) % n;
             y = (y * y + 1) % n;
-            
+            //both follows the polynomial function f(x) = x^2 + 1 mod N
+            //the idea is to detect a cycle in the sequence.
+
+
             // Calculate the difference
             long diff = Math.abs(x - y);
             
-            // Find the greatest common divisor
-            d = gcd(diff, n);
+            // Find the greatest common divisor MDC
+            d = mdc(diff, n);
         }
         
         return d;
     }
     
     /**
-     * Simple GCD calculation
+     * Simple MDC calculation
      */
-    private static long gcd(long a, long b) {
+    private static long mdc(long a, long b) {
         while (b != 0) {
             long temp = b;
             b = a % b;
@@ -46,7 +55,8 @@ public class PollardRho {
     }
     
     /**
-     * Check if a number is prime (simple version)
+     * Check if a number is prime 
+     * this is a simple version that jumps all multiples of 2 and 3 
      */
     private static boolean isPrime(long n) {
         if (n <= 1) return false;
